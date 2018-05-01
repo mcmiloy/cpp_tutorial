@@ -22,13 +22,13 @@ public:
     int GetHealth(){return this->health;}
     
     int GetAttack(){
-        int attack_this_turn = random() % this->attack;
+        int attack_this_turn = std::rand() % this->attack;
         std::cout << this->name << " dealt " << attack_this_turn << " damage.\n";
         return attack_this_turn;
     }
 
     int GetBlock(){
-        int block_this_turn = random() % this->block;
+        int block_this_turn = std::rand() % this->block;
         std::cout << this->name << " blocked " << block_this_turn << " damage.\n";       
         return block_this_turn;
     }
@@ -84,7 +84,7 @@ public:
 
 int main(){
 
-    srand(time(NULL));
+    std::srand(time(NULL));
     Warrior thor("Thor", 100, 30, 15);
     Warrior hulk("Hulk", 135, 25, 10);
 
