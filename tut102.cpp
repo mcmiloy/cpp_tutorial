@@ -33,8 +33,10 @@ public:
         return block_this_turn;
     }
 
-    void TakeDamage(int damage){this->health -= damage;
-        std::cout << this->name << " now has " << this->health << " health.\n";}
+    void TakeDamage(int damage){
+        if(damage>0) this->health -= damage;
+        std::cout << this->name << " now has " << this->health << " health.\n";
+    }
 
     std::string ListStats();
 };
@@ -62,15 +64,13 @@ public:
     static void StartFight(Warrior first, Warrior second){
         std::cout << "Battle:\n" << first.ListStats() << "vs\n" << second.ListStats() << "\n"; 
         while(true){
-            second.TakeDamage((first.GetAttack()-second.GetBlock() > 0) ? 
-            first.GetAttack()-second.GetBlock() : 
-            0);
+            int first_damage = first.GetAttack()-second.GetBlock();
+            second.TakeDamage(first_damage);
             std::cout << "\n";           
             if(second.GetHealth() <= 0) break;
-            
-            first.TakeDamage((second.GetAttack()-first.GetBlock() > 0) ? 
-            second.GetAttack()-first.GetBlock() : 
-            0);
+
+            int second_damage = second.GetAttack()-first.GetBlock();           
+            first.TakeDamage(second_damage);                        
             std::cout << "\n";            
             if(first.GetHealth() <= 0) break;
         }
@@ -83,7 +83,6 @@ public:
 };
 
 int main(){
-
 
     srand(time(NULL));
     Warrior thor("Thor", 100, 30, 15);
