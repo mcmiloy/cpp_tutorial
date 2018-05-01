@@ -62,10 +62,15 @@ public:
     static void StartFight(Warrior first, Warrior second){
         std::cout << "Battle:\n" << first.ListStats() << "vs\n" << second.ListStats() << "\n"; 
         while(true){
-            second.TakeDamage(first.GetAttack()-second.GetBlock());
+            second.TakeDamage((first.GetAttack()-second.GetBlock() > 0) ? 
+            first.GetAttack()-second.GetBlock() : 
+            0);
             std::cout << "\n";           
             if(second.GetHealth() <= 0) break;
-            first.TakeDamage(second.GetAttack()-first.GetBlock());
+            
+            first.TakeDamage((second.GetAttack()-first.GetBlock() > 0) ? 
+            second.GetAttack()-first.GetBlock() : 
+            0);
             std::cout << "\n";            
             if(first.GetHealth() <= 0) break;
         }
