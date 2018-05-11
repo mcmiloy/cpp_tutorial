@@ -1,10 +1,11 @@
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <ctime>
 #include <numeric>
+#include <cmath>
 #include <math.h>
-#include <cstdlib>
 
 class Animal{
 private:
